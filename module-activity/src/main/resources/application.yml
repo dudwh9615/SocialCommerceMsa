@@ -21,7 +21,7 @@ spring:
     port: 6378
 
   datasource:
-    url: jdbc:postgresql://postgres:5432/scdb
+    url: jdbc:postgresql://postgres:5433/content
     username: root
     password: 1234
     driver-class-name: org.postgresql.Driver

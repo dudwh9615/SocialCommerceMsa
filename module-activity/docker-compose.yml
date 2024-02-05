@@ -2,41 +2,42 @@ version: '3'
 
 services:
   postgres:
-    container_name: postgres
+    container_name: postgres_activity
     image: postgres:latest
     restart: always
     ports:
-      - 5432:5432
+      - 5433:5432
     environment:
-      POSTGRES_DB: scdb
+      POSTGRES_DB: content
       POSTGRES_USER: root
       POSTGRES_PASSWORD: 1234
 
+#  redis:
+#    container_name: redis_activity
+#    image: redis:latest
+#    ports:
+#      - 6379:6379
+
   adminer:
+    container_name: adminer_activity
     image: adminer
     restart: always
     ports:
-      - 8081:8080
+      - 8091:8080
     depends_on:
       - postgres
 
-  redis:
-    container_name: redis
-    image: redis:latest
-    ports:
-      - 6378:6379
-
   application:
-    container_name: SocialCommerce
+    container_name: activity_service
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 8081:8080
     depends_on:
       - postgres
-      - redis
+#      - redis
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/scdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/content
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234

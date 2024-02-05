@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgres:
-    container_name: postgres
+    container_name: postgres_user
     image: postgres:latest
     restart: always
     ports:
@@ -13,21 +13,22 @@ services:
       POSTGRES_PASSWORD: 1234
 
   adminer:
+    container_name: adminer_user
     image: adminer
     restart: always
     ports:
-      - 8081:8080
+      - 8090:8080
     depends_on:
       - postgres
 
   redis:
-    container_name: redis
+    container_name: redis_user
     image: redis:latest
     ports:
       - 6378:6379
 
   application:
-    container_name: SocialCommerce
+    container_name: user_service
     build:
       context: .
       dockerfile: Dockerfile
