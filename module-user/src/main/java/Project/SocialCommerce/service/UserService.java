@@ -1,10 +1,7 @@
 package Project.SocialCommerce.service;
 
 import Project.SocialCommerce.dto.*;
-import Project.SocialCommerce.model.Activity;
-import Project.SocialCommerce.model.Interaction;
 import Project.SocialCommerce.model.User;
-import Project.SocialCommerce.repository.ActivityRepository;
 import Project.SocialCommerce.repository.UserRepository;
 import Project.SocialCommerce.util.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,7 +21,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
-    private final ActivityRepository activityRepository;
+//    private final ActivityRepository activityRepository;
 
 
 
@@ -70,15 +67,15 @@ public class UserService {
         targetUser.getFollowers().add(loggedInUser);
         User user = userRepository.save(loggedInUser);
         User target = userRepository.save(targetUser);
-        addActivity(user, target);
+//        addActivity(user, target);
     }
-    public void addActivity(User user, User target) {
-        Activity activity = new Activity();
-        activity.setFollowUser(target);
-        activity.setUser(user);
-
-        activityRepository.save(activity);
-    }
+//    public void addActivity(User user, User target) {
+//        Activity activity = new Activity();
+//        activity.setFollowUser(target);
+//        activity.setUser(user);
+//
+//        activityRepository.save(activity);
+//    }
 
 
     public void unFollowing(String loginUserEmail, FollowRequestDto followRequestDto) {

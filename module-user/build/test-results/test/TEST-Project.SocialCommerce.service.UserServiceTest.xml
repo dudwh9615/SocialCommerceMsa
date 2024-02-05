@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Project.SocialCommerce.service.UserServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-03T12:33:37" hostname="DESKTOP-2N7HPE5" time="0.001">
+<testsuite name="Project.SocialCommerce.service.UserServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-05T13:16:55" hostname="DESKTOP-2N7HPE5" time="0.001">
   <properties/>
   <testcase name="register()" classname="Project.SocialCommerce.service.UserServiceTest" time="0.001"/>
   <testcase name="findByEmail()" classname="Project.SocialCommerce.service.UserServiceTest" time="0.0"/>
