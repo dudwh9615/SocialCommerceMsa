@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgres:
-    container_name: postgres
+    container_name: postgres_newsfeed
     image: postgres:latest
     restart: always
     ports:
@@ -13,6 +13,7 @@ services:
       POSTGRES_PASSWORD: 1234
 
   adminer:
+    container_name: adminer_newsfeed
     image: adminer
     restart: always
     ports:

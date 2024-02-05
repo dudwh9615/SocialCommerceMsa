@@ -1,1 +1,4 @@
 rootProject.name = 'SocialCommerceMsa'
+includeFlat 'server-eureka'
+
+
