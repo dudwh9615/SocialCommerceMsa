@@ -21,6 +21,12 @@ services:
     depends_on:
       - postgres
 
+  redis:
+    container_name: redis_newsfeed
+    image: redis:latest
+    ports:
+      - 6378:6379
+
   application:
     container_name: newsfeed
     build:
