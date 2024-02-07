@@ -16,8 +16,8 @@ public class InteractionService {
     private final InteractionRepository interactionRepository;
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
-    private final ActivityRepository activityRepository;
+//    private final UserRepository userRepository;
+//    private final ActivityRepository activityRepository;
 
     public void likesComment(LikeCommentDto dto, String email) {
         Interaction likes = new Interaction();
@@ -31,12 +31,12 @@ public class InteractionService {
             throw new IllegalArgumentException(("댓글이 달린 게시물이 존재하지 않습니다."));
         }
         Post post = postOpt.get();
-        User user = userRepository.findByEmail(email).get();
+//        User user = userRepository.findByEmail(email).get();
         likes.setComment(comment);
-        likes.setUser(user);
+//        likes.setUser(user);
 
         Interaction saved = interactionRepository.save(likes);
-        addActivity(user, saved);
+//        addActivity(user, saved);
     }
 
     public void likesPost(LikePostDto dto, String email) {
@@ -46,19 +46,19 @@ public class InteractionService {
             throw new IllegalArgumentException(("게시물이 존재하지 않습니다."));
         }
         Post post = postOpt.get();
-        User user = userRepository.findByEmail(email).get();
+//        User user = userRepository.findByEmail(email).get();
         likes.setPost(post);
-        likes.setUser(user);
+//        likes.setUser(user);
 
         Interaction saved = interactionRepository.save(likes);
-        addActivity(user, saved);
+//        addActivity(user, saved);
     }
 
-    public void addActivity(User user, Interaction interaction) {
-        Activity activity = new Activity();
-        activity.setInteraction(interaction);
-        activity.setUser(user);
-
-        activityRepository.save(activity);
-    }
+//    public void addActivity(User user, Interaction interaction) {
+//        Activity activity = new Activity();
+//        activity.setInteraction(interaction);
+//        activity.setUser(user);
+//
+//        activityRepository.save(activity);
+//    }
 }

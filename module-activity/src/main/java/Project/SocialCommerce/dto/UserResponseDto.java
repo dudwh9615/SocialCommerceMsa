@@ -1,6 +1,5 @@
 package Project.SocialCommerce.dto;
 
-import Project.SocialCommerce.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,12 +11,12 @@ public class UserResponseDto {
     private String profile;
     private String greetings;
 
-    public static UserResponseDto toDto(User user) {
-        UserResponseDto dto = new UserResponseDto();
-        dto.setName(user.getName());
-        dto.setEmail(user.getEmail());
-        dto.setProfile(user.getProfile());
-        dto.setGreetings(user.getGreetings());
-        return dto;
-    }
+//    public static UserResponseDto toDto(User user) {
+//        UserResponseDto dto = new UserResponseDto();
+//        dto.setName(user.getName());
+//        dto.setEmail(user.getEmail());
+//        dto.setProfile(user.getProfile());
+//        dto.setGreetings(user.getGreetings());
+//        return dto;
+//    }
 }

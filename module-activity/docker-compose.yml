@@ -12,12 +12,6 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: 1234
 
-#  redis:
-#    container_name: redis_activity
-#    image: redis:latest
-#    ports:
-#      - 6379:6379
-
   adminer:
     container_name: adminer_activity
     image: adminer
@@ -33,11 +27,13 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8081:8080
+      - 8081:8081
     depends_on:
       - postgres
-#      - redis
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/content
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
+      SERVER_PORT: 8081
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://host.docker.internal:8761/eureka/
+

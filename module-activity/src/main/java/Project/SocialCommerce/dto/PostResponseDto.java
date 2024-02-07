@@ -20,7 +20,7 @@ public class PostResponseDto {
 
     public PostResponseDto(Post post) {
         setId(post.getId());
-        setCreateUserEmail(post.getUser().getEmail());
+//        setCreateUserEmail(post.getUser().getEmail());
         setContent(post.getContent());
         setCreatedAt(post.getCreatedAt().toString());
     }

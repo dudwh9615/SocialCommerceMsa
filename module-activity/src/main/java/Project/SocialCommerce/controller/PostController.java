@@ -18,8 +18,8 @@ public class PostController {
     private final InteractionService interactionService;
 
     @PostMapping
-    public ResponseEntity<String> posting(@RequestBody PostRequestDto postRequestDto, Principal principal) {
-        postService.addPost(postRequestDto, principal.getName());
+    public ResponseEntity<String> posting(@RequestBody PostRequestDto postRequestDto) {
+        postService.addPost(postRequestDto);
         return ResponseEntity.ok("게시 완료");
     }
 
