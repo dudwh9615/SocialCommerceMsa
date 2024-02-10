@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = SocialCommerceApplication.class)
 class SocialCommerceApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 

@@ -12,6 +12,7 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: 1234
 
+
   adminer:
     container_name: adminer_activity
     image: adminer
@@ -21,8 +22,9 @@ services:
     depends_on:
       - postgres
 
+
   application:
-    container_name: activity_service
+    container_name: service-activity
     build:
       context: .
       dockerfile: Dockerfile
@@ -36,4 +38,3 @@ services:
       SPRING_DATASOURCE_PASSWORD: 1234
       SERVER_PORT: 8081
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://host.docker.internal:8761/eureka/
-

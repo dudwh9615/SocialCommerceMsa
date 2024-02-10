@@ -8,6 +8,3 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8761:8761
-    environment:
-      eureka.instance.hostname: eureka-server
-      eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/

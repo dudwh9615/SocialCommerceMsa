@@ -32,6 +32,8 @@ public class User {
     @Column(name="greetings", nullable = false)
     private String greetings;
 
+//    private String auth;
+
     @ManyToMany
     @JoinTable(
             name = "follow_relationship",

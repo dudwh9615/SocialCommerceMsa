@@ -27,7 +27,7 @@ services:
       - 6378:6379
 
   application:
-    container_name: user_service
+    container_name: service-user
     build:
       context: .
       dockerfile: Dockerfile
@@ -40,5 +40,5 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/users_db
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
-      SERVER_PORT: 8080
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://host.docker.internal:8761/eureka/
+#      SERVER_PORT: 8080
+#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://host.docker.internal:8761/eureka/

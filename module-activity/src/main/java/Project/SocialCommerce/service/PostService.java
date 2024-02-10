@@ -1,8 +1,10 @@
 package Project.SocialCommerce.service;
 
+import Project.SocialCommerce.controller.UserClient;
 import Project.SocialCommerce.dto.EditPostRequestDto;
 import Project.SocialCommerce.dto.PostRequestDto;
 import Project.SocialCommerce.dto.PostResponseDto;
+import Project.SocialCommerce.dto.UserResponseDto;
 import Project.SocialCommerce.model.Comment;
 import Project.SocialCommerce.model.Post;
 import Project.SocialCommerce.repository.PostRepository;
@@ -16,16 +18,21 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserClient userClient;
 //    private final UserRepository userRepository;
 //    private final ActivityRepository activityRepository;
 
 
-    public void addPost(PostRequestDto postRequestDto) {
-//        User user = userRepository.findByEmail(email).get();
+    public void addPost(PostRequestDto postRequestDto, String jwt) {
+        System.out.println("====================================jwt입니다." + jwt);
+        UserResponseDto userResponseDto = userClient.findByJwt(jwt);
+        if (userResponseDto == null){
+            throw new IllegalArgumentException("회원 정보가 없습니다.");
+        }
         Post newPost = new Post();
 
         newPost.setContent(postRequestDto.getContent());
-//        newPost.setUser(user);
+        newPost.setEmail(userResponseDto.getEmail());
 
         Post savedPost = postRepository.save(newPost);
 //        addActivity(user, savedPost);

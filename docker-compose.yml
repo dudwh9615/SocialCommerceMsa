@@ -1,0 +1,107 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - ./users_db.sql:/docker-entrypoint-initdb.d/users_db.sql
+      - ./activity.sql:/docker-entrypoint-initdb.d/activity.sql
+      - ./newsfeed.sql:/docker-entrypoint-initdb.d/newsfeed.sql
+    networks:
+      - project
+
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8080
+    depends_on:
+      - postgres
+    networks:
+      - project
+
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - 6378:6379
+    networks:
+      - project
+
+
+  server-eureka:
+    container_name: server-eureka
+    build:
+      context: ./server-eureka
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - project
+
+
+  service-user:
+    container_name: service-user
+    build:
+      context: ./module-user
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+      - redis
+      - server-eureka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/users_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://server-eureka:8761/eureka/
+    networks:
+      - project
+
+
+  service-activity:
+    container_name: service-activity
+    build:
+      context: ./module-activity
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+    depends_on:
+      - postgres
+      - server-eureka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/activity
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://server-eureka:8761/eureka/
+    networks:
+      - project
+
+  service-newsfeed:
+    container_name: service-newsfeed
+    build:
+      context: ./module-newsfeed
+      dockerfile: Dockerfile
+    ports:
+      - 8082:8082
+    depends_on:
+      - postgres
+      - server-eureka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/newsfeed
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+
+networks:
+  project:

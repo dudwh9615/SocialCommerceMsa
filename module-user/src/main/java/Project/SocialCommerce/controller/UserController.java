@@ -24,8 +24,13 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<UserResponseDto> findByEmail(Principal principal){
+    public ResponseEntity<UserResponseDto> findByLoginEmail(Principal principal){
         return ResponseEntity.ok(userService.findByEmail(principal.getName()));
+    }
+
+    @GetMapping("/users/{jwt}")
+    public UserResponseDto findByEmail(@PathVariable String jwt){
+        return userService.findByJwt(jwt);
     }
 
     @PostMapping("/sign-up")

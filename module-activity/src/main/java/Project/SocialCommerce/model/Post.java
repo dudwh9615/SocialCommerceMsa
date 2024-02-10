@@ -20,8 +20,8 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(name="email", nullable = false)
-//    private String email;
+    @Column(name="email", nullable = false)
+    private String email;
 
     @Column(name="content", nullable = false)
     private String content;

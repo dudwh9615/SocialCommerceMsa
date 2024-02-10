@@ -4,6 +4,7 @@ import Project.SocialCommerce.dto.*;
 import Project.SocialCommerce.model.User;
 import Project.SocialCommerce.repository.UserRepository;
 import Project.SocialCommerce.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,14 @@ public class UserService {
         }
 
         return UserResponseDto.toDto(res.get());
+    }
+
+    public UserResponseDto findByJwt(String jwt) {
+        jwt = jwtUtil.substringToken(jwt);
+        Claims userInfo = jwtUtil.getUserInfoFromToken(jwt);
+        String email = userInfo.getSubject();
+        System.out.println("이메일은" + email);
+        return findByEmail(email);
     }
 
     public void following(String loginUserEmail, FollowRequestDto followRequestDto) {

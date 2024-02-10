@@ -18,8 +18,8 @@ public class PostController {
     private final InteractionService interactionService;
 
     @PostMapping
-    public ResponseEntity<String> posting(@RequestBody PostRequestDto postRequestDto) {
-        postService.addPost(postRequestDto);
+    public ResponseEntity<String> posting(@RequestBody PostRequestDto postRequestDto, @CookieValue(name = "Authorization") String jwt) {
+        postService.addPost(postRequestDto, jwt);
         return ResponseEntity.ok("게시 완료");
     }
 
