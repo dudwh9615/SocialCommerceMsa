@@ -1,0 +1,29 @@
+server:
+  port: 8000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://host.docker.internal:8761/eureka/
+
+spring:
+  application:
+    name: service-api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service-user
+          uri: lb://SERVICE-USER
+          predicates:
+            - Path=/users/**
+
+
+        - id: service-activity
+          uri: lb://SERVICE-ACTIVITY
+          predicates:
+            - Path=/content/**
