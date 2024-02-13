@@ -1,0 +1,13 @@
+package Project.SocialCommerce.dto;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class EditCommentRequestDto {
+    private Long commentId;
+    private String content;
+}
