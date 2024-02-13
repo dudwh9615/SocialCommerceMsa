@@ -9,7 +9,7 @@ import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/interaction")
+@RequestMapping("contents/interaction")
 public class InteractionController {
 
 //    private final InteractionService interactionService;

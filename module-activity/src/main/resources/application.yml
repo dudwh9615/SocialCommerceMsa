@@ -5,14 +5,12 @@ spring:
   application:
     name: service-activity
   datasource:
-    url: jdbc:postgresql://postgres:5432/content
+    url: jdbc:postgresql://postgres:5432/activity
     username: root
     password: 1234
     driver-class-name: org.postgresql.Driver
 
 eureka:
-  instance:
-    preferIpAddress: false
   client:
     register-with-eureka: true
     fetch-registry: true

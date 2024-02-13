@@ -11,7 +11,7 @@ import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/posts")
+@RequestMapping("/contents/posts")
 public class PostController {
 
     private final PostService postService;
@@ -29,14 +29,20 @@ public class PostController {
     }
 
     @PutMapping
-    public ResponseEntity<String> editPost(@RequestBody EditPostRequestDto editPostRequestDto, Principal principal) {
-        postService.editPost(editPostRequestDto, principal.getName());
+    public ResponseEntity<String> editPost(@RequestBody EditPostRequestDto editPostRequestDto, @CookieValue(name = "Authorization") String jwt) {
+        postService.editPost(editPostRequestDto, jwt);
         return ResponseEntity.ok("게시글 수정 완료");
     }
 
+    @DeleteMapping
+    public ResponseEntity<String> deletePost(@RequestBody EditPostRequestDto editPostRequestDto, @CookieValue(name = "Authorization") String jwt) {
+        postService.delPost(editPostRequestDto, jwt);;
+        return ResponseEntity.ok("게시글 삭제 완료");
+    }
+
     @PostMapping("/interactions")
-    public ResponseEntity<String> likesPost(@RequestBody LikePostDto postDto, Principal principal) {
-        interactionService.likesPost(postDto, principal.getName());
+    public ResponseEntity<String> likesPost(@RequestBody LikePostDto postDto, @CookieValue(name = "Authorization") String jwt) {
+        interactionService.likesPost(postDto, jwt);
         return ResponseEntity.ok("게시글 좋아요");
     }
 

@@ -18,9 +18,7 @@ public class Interaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    private String userEmail;
 
     @ManyToOne
     @JoinColumn(name = "post_id")

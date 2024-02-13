@@ -30,10 +30,8 @@ public class Post {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
-
     @OneToMany(mappedBy = "post")
     private List<Comment> comments = new ArrayList<>();
+
+    private List<Long> interactionUser = new ArrayList<>();
 }
