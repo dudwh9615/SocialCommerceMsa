@@ -49,6 +49,17 @@ services:
     networks:
       - project
 
+  service-gateway:
+    container_name: service-gateway
+    build:
+      context: ./Gateway
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    depends_on:
+      - server-eureka
+    networks:
+      - project
 
   service-user:
     container_name: service-user
