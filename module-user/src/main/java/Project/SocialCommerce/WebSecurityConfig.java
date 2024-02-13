@@ -58,15 +58,19 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 
+        http.formLogin(login -> login
+                .loginProcessingUrl("/users/login")
+//                .usernameParameter("email")
+//                .passwordParameter("pwd")
+        );
+
         http.logout((httpSecurityLogoutConfigurer) ->
                 httpSecurityLogoutConfigurer
-                        .logoutUrl("/logout")
+                        .logoutUrl("/users/logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("Authorization")
         );
 
-        // 로그인 사용
-//        http.formLogin(Customizer.withDefaults());
 
         // 접근 불가 페이지
 //        http.exceptionHandling((exceptionHandling) ->

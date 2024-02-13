@@ -1,5 +1,6 @@
 package Project.SocialCommerce.service;
 
+import Project.SocialCommerce.controller.ActivityClient;
 import Project.SocialCommerce.dto.*;
 import Project.SocialCommerce.model.User;
 import Project.SocialCommerce.repository.UserRepository;
@@ -22,6 +23,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final ActivityClient activityClient;
 //    private final ActivityRepository activityRepository;
 
 
@@ -36,7 +38,8 @@ public class UserService {
             throw new IllegalArgumentException("중복 이메일 입니다.");
         }
         // 유저 등록
-        userRepository.save(requestDto.toEntity());
+        User saved = userRepository.save(requestDto.toEntity());
+        activityClient.createFollowInfo(saved.getId());
     }
 
     public UserResponseDto findByEmail(String email) {

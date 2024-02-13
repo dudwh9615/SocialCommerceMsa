@@ -14,6 +14,7 @@ import java.security.Principal;
 
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -23,14 +24,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public ResponseEntity<UserResponseDto> findByLoginEmail(Principal principal){
         return ResponseEntity.ok(userService.findByEmail(principal.getName()));
     }
 
-    @GetMapping("/users/{jwt}")
-    public UserResponseDto findByEmail(@PathVariable String jwt){
+    @GetMapping("/jwt/{jwt}")
+    public UserResponseDto findByJwt(@PathVariable String jwt){
         return userService.findByJwt(jwt);
+    }
+
+    @GetMapping("/email/{email}")
+    public UserResponseDto findByEmail(@PathVariable String email){
+        return userService.findByEmail(email);
     }
 
     @PostMapping("/sign-up")
@@ -40,7 +46,7 @@ public class UserController {
         return ResponseEntity.ok("회원가입 완료");
     }
 
-    @PutMapping("/users")
+    @PutMapping
     public ResponseEntity<String> modifyUserInfo(@RequestBody @Valid ModifyRequestDto modifyRequestDto, Principal principal, HttpServletResponse httpServletResponse) {
         userService.modifyUserInfo(modifyRequestDto, principal.getName());
         if (modifyRequestDto.getPwd() != null){
@@ -52,20 +58,6 @@ public class UserController {
 
         }
         return ResponseEntity.ok("회원정보 수정 완료");
-    }
-
-    @PostMapping("/following")
-    public ResponseEntity<String> followUser(@RequestBody FollowRequestDto followRequestDto, Principal principal) {
-        String loginUserEmail = principal.getName();
-        userService.following(loginUserEmail, followRequestDto);
-        return ResponseEntity.ok("팔로우 성공");
-    }
-
-    @PostMapping("/unfollowing")
-    public ResponseEntity<String> unFollowUser(@RequestBody FollowRequestDto followRequestDto, Principal principal) {
-        String loginUserEmail = principal.getName();
-        userService.unFollowing(loginUserEmail, followRequestDto);
-        return ResponseEntity.ok("팔로우 취소");
     }
 
 
