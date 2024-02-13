@@ -66,4 +66,18 @@ public class CommentService {
 
         commentRepository.save(comment);
     }
+
+    public void delComment(EditCommentRequestDto requestDto, String jwt) {
+        Optional<Comment> Opt = commentRepository.findById(requestDto.getCommentId());
+        if (Opt.isEmpty()) {
+            throw new IllegalArgumentException("댓글 정보가 없습니다.");
+        }
+        Comment comment = Opt.get();
+
+        if (!comment.getUserEmail().equals(userClient.findByJwt(jwt).getEmail())) {
+            throw new IllegalArgumentException("삭제 권한이 없습니다.");
+        }
+
+        commentRepository.delete(comment);
+    }
 }

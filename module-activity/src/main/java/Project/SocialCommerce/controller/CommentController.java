@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +28,12 @@ public class CommentController {
     public ResponseEntity<String> editComment(@RequestBody EditCommentRequestDto requestDto, @CookieValue(name = "Authorization") String jwt) {
         commentService.editComment(requestDto, jwt);
         return ResponseEntity.ok("댓글 수정 완료");
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteComment(@RequestBody EditCommentRequestDto requestDto, @CookieValue(name = "Authorization") String jwt) {
+        commentService.delComment(requestDto, jwt);;
+        return ResponseEntity.ok("댓글 삭제 완료");
     }
 
     @PostMapping("/interactions")
