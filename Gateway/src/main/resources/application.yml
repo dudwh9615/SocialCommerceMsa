@@ -26,4 +26,4 @@ spring:
         - id: service-activity
           uri: lb://SERVICE-ACTIVITY
           predicates:
-            - Path=/content/**
+            - Path=/contents/**
