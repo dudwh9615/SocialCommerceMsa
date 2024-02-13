@@ -34,24 +34,4 @@ public class User {
 
 //    private String auth;
 
-    @ManyToMany
-    @JoinTable(
-            name = "follow_relationship",
-            joinColumns = @JoinColumn(name = "following_id"),
-            inverseJoinColumns = @JoinColumn(name = "follower_id")
-    )
-    private List<User> following;
-
-    @ManyToMany(mappedBy = "following")
-    private List<User> followers;
-
-//    @OneToMany(mappedBy = "user")
-//    private List<Post> posts = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "user")
-//    private List<Comment> comments = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "user")
-//    private List<Interaction> interactions = new ArrayList<>();
-
 }
