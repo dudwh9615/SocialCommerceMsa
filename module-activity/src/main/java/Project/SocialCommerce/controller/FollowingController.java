@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,6 +26,10 @@ public class FollowingController {
     public ResponseEntity<String> followUser(@RequestBody FollowRequestDto followRequestDto, @CookieValue(name = "Authorization") String jwt) {
         followingService.following(jwt, followRequestDto);
         return ResponseEntity.ok("팔로우 성공");
+    }
+    @GetMapping("/following/{jwt}")
+    public List<Long> getUserFollowingList(@PathVariable String jwt) {
+        return followingService.findByJwt(jwt);
     }
 
 

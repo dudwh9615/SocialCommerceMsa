@@ -1,14 +1,15 @@
 package Project.SocialCommerce.service;
 
-import Project.SocialCommerce.controller.UserClient;
 import Project.SocialCommerce.dto.*;
 import Project.SocialCommerce.model.Comment;
+import Project.SocialCommerce.model.ContentTypeEnum;
 import Project.SocialCommerce.model.Post;
 import Project.SocialCommerce.repository.CommentRepository;
 import Project.SocialCommerce.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -18,7 +19,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserClient userClient;
     private final CommentRepository commentRepository;
-//    private final ActivityRepository activityRepository;
+    private final NewsFeedClient newsFeedClient;
 
 
     public void addPost(PostRequestDto postRequestDto, String jwt) {
@@ -33,16 +34,19 @@ public class PostService {
         newPost.setEmail(userResponseDto.getEmail());
 
         Post savedPost = postRepository.save(newPost);
-//        addActivity(user, savedPost);
+        addFeed(savedPost, userResponseDto);
     }
+    public void addFeed(Post post, UserResponseDto user) {
+        FeedDto newFeed = new FeedDto();
 
-//    public void addActivity(User user, Post post) {
-//        Activity activity = new Activity();
-//        activity.setPost(post);
-//        activity.setUser(user);
-//
-//        activityRepository.save(activity);
-//    }
+        newFeed.setUserId(user.getId());
+        newFeed.setUserName(user.getName());
+        newFeed.setPostId(post.getId());
+        newFeed.setDoing(ContentTypeEnum.POST);
+        newFeed.setCreatedAt(post.getCreatedAt());
+
+        newsFeedClient.addFeed(newFeed);
+    }
 
     public PostResponseDto getPost(Long postId) {
         Optional<Post> post = postRepository.findById(postId);
@@ -86,18 +90,33 @@ public class PostService {
 
     public void likesPost(LikePostDto postDto, String jwt) {
         Optional<Post> targetPostOpt = postRepository.findById(postDto.getPostId());
-        Long userId = userClient.findByJwt(jwt).getId();
+        UserResponseDto user = userClient.findByJwt(jwt);
         if (targetPostOpt.isEmpty()) {
             throw new IllegalArgumentException("없는 게시물 입니다.");
         }
         Post targetPost = targetPostOpt.get();
 
-        if (targetPost.getInteractionUser().contains(userId)) {
+        if (targetPost.getInteractionUser().contains(user.getId())) {
             throw new IllegalArgumentException("이미 좋아요를 누르셨습니다.");
         }
 
-        targetPost.getInteractionUser().add(userId);
+        targetPost.getInteractionUser().add(user.getId());
 
         postRepository.save(targetPost);
+        addFeed(targetPost, user, targetPost.getEmail());
+    }
+    public void addFeed(Post post, UserResponseDto user, String targetEmail) {
+        FeedDto newFeed = new FeedDto();
+        UserResponseDto target = userClient.findByEmail(targetEmail);
+
+        newFeed.setUserId(user.getId());
+        newFeed.setUserName(user.getName());
+        newFeed.setTargetUserId(target.getId());
+        newFeed.setTargetUserName(target.getName());
+        newFeed.setPostId(post.getId());
+        newFeed.setDoing(ContentTypeEnum.LIKES);
+        newFeed.setCreatedAt(LocalDateTime.now());
+
+        newsFeedClient.addFeed(newFeed);
     }
 }
