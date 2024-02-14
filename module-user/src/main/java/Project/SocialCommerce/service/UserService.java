@@ -59,59 +59,6 @@ public class UserService {
         return findByEmail(email);
     }
 
-    public void following(String loginUserEmail, FollowRequestDto followRequestDto) {
-        Optional<User> loggedInUserOpt = userRepository.findByEmail(loginUserEmail);
-        Optional<User> targetUserOpt = userRepository.findByEmail(followRequestDto.getTargetUserEmail());
-        User loggedInUser = loggedInUserOpt.get();
-        User targetUser;
-
-        if (targetUserOpt.isEmpty()) {
-            throw new IllegalArgumentException("상대 계정이 존재하지 않습니다.");
-        }
-        targetUser = targetUserOpt.get();
-
-        // 이미 팔로잉 중이라면
-        if (targetUser.getFollowers().contains(loggedInUser)) {
-            throw new IllegalArgumentException("이미 팔로우 중입니다.");
-        }
-
-        loggedInUser.getFollowing().add(targetUser);
-        targetUser.getFollowers().add(loggedInUser);
-        User user = userRepository.save(loggedInUser);
-        User target = userRepository.save(targetUser);
-//        addActivity(user, target);
-    }
-//    public void addActivity(User user, User target) {
-//        Activity activity = new Activity();
-//        activity.setFollowUser(target);
-//        activity.setUser(user);
-//
-//        activityRepository.save(activity);
-//    }
-
-
-    public void unFollowing(String loginUserEmail, FollowRequestDto followRequestDto) {
-        Optional<User> loggedInUserOpt = userRepository.findByEmail(loginUserEmail);
-        Optional<User> targetUserOpt = userRepository.findByEmail(followRequestDto.getTargetUserEmail());
-        User loggedInUser = loggedInUserOpt.get();
-        User targetUser;
-
-        if (targetUserOpt.isEmpty()) {
-            throw new IllegalStateException("탈퇴한 회원입니다.");
-        }
-        targetUser = targetUserOpt.get();
-
-        // 팔로우 관계 확인
-        if (loggedInUser.getFollowing().contains(targetUser)) {
-            // 언팔로우 수행
-            loggedInUser.getFollowing().remove(targetUser);
-            targetUser.getFollowers().remove(loggedInUser);
-        }
-
-        userRepository.save(loggedInUser);
-        userRepository.save(targetUser);
-    }
-
     public void modifyUserInfo(ModifyRequestDto modifyRequestDto, String email) {
         Optional<User> originalUserOptional = userRepository.findByEmail(email);
         if (originalUserOptional.isEmpty()) {
