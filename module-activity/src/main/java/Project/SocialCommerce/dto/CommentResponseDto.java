@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,13 @@ public class CommentResponseDto {
     private String userEmail;
     private String content;
     private Long interactionUserCount;
+    private LocalDateTime CreatedAt;
 
     public CommentResponseDto (Comment comment) {
         setCommentId(comment.getId());
         setUserEmail(comment.getUserEmail());
         setContent(comment.getContent());
         setInteractionUserCount(comment.getInteractionUser().stream().count());
+        setCreatedAt(comment.getCreatedAt());
     }
 }
