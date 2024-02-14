@@ -4,7 +4,6 @@ import Project.SocialCommerce.dto.CommentingRequestDto;
 import Project.SocialCommerce.dto.EditCommentRequestDto;
 import Project.SocialCommerce.dto.LikeCommentDto;
 import Project.SocialCommerce.service.CommentService;
-import Project.SocialCommerce.service.InteractionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
 
     private final CommentService commentService;
-    private final InteractionService interactionService;
 
     @PostMapping
     public ResponseEntity<String> commenting(@RequestBody CommentingRequestDto requestDto, @CookieValue(name = "Authorization") String jwt) {

@@ -1,7 +1,6 @@
 package Project.SocialCommerce.controller;
 
 import Project.SocialCommerce.dto.*;
-import Project.SocialCommerce.service.InteractionService;
 import Project.SocialCommerce.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ import java.security.Principal;
 public class PostController {
 
     private final PostService postService;
-    private final InteractionService interactionService;
 
     @PostMapping
     public ResponseEntity<String> posting(@RequestBody PostRequestDto postRequestDto, @CookieValue(name = "Authorization") String jwt) {

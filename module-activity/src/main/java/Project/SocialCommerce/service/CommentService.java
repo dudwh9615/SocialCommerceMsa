@@ -10,7 +10,6 @@ import Project.SocialCommerce.model.Comment;
 import Project.SocialCommerce.model.Post;
 
 import Project.SocialCommerce.repository.CommentRepository;
-import Project.SocialCommerce.repository.InteractionRepository;
 import Project.SocialCommerce.repository.PostRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -79,8 +78,6 @@ public class CommentService {
         if (!comment.getUserEmail().equals(userClient.findByJwt(jwt).getEmail())) {
             throw new IllegalArgumentException("삭제 권한이 없습니다.");
         }
-
-        interactionRepository.deleteAllByCommentId(comment.getId());
 
         commentRepository.delete(comment);
     }
