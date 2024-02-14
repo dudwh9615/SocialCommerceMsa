@@ -22,8 +22,12 @@ spring:
           predicates:
             - Path=/users/**
 
-
         - id: service-activity
           uri: lb://SERVICE-ACTIVITY
           predicates:
             - Path=/contents/**
+
+        - id: service-newsfeed
+          uri: lb://SERVICE-NEWSFEED
+          predicates:
+            - Path=/feeds/**
