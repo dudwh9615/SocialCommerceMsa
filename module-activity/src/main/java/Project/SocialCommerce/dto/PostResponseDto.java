@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,11 @@ public class PostResponseDto {
         setContent(post.getContent());
         setCreatedAt(post.getCreatedAt().toString());
         setLikesCount(post.getInteractionUser().stream().count());
-        setComments(post.getComments().stream().map(CommentResponseDto::new).toList());
+        setComments(post.getComments()
+                .stream()
+                .map(CommentResponseDto::new)
+                .sorted(Comparator.comparing(CommentResponseDto::getCommentId))
+                .toList()
+        );
     }
 }
