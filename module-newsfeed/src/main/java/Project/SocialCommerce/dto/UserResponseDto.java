@@ -1,23 +1,14 @@
 package Project.SocialCommerce.dto;
 
-import Project.SocialCommerce.model.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class UserResponseDto {
-    private String email;
-    private String name;
-    private String profile;
-    private String greetings;
-
-    public static UserResponseDto toDto(User user) {
-        UserResponseDto dto = new UserResponseDto();
-        dto.setName(user.getName());
-        dto.setEmail(user.getEmail());
-        dto.setProfile(user.getProfile());
-        dto.setGreetings(user.getGreetings());
-        return dto;
-    }
+    private List<Long> following;
 }

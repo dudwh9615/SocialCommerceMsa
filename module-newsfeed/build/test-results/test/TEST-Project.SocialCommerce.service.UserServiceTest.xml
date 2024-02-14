@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Project.SocialCommerce.service.UserServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-10T16:39:54" hostname="DESKTOP-2N7HPE5" time="0.01">
-  <properties/>
-  <testcase name="register()" classname="Project.SocialCommerce.service.UserServiceTest" time="0.009"/>
-  <testcase name="findByEmail()" classname="Project.SocialCommerce.service.UserServiceTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

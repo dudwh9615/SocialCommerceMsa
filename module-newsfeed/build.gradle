@@ -18,7 +18,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 	// JPA 의존성 추가
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.projectlombok:lombok:1.18.28'
@@ -26,7 +26,6 @@ dependencies {
 	implementation 'org.projectlombok:lombok:1.18.22'
 	annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
-	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// JPA 구현체인 hibernate
 	implementation 'org.hibernate:hibernate-core:6.1.7.Final'
@@ -36,15 +35,17 @@ dependencies {
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
-	// mail
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.0.5'
 	// validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	// redis
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
 	// postgresql
 	implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0' // 추가
 	runtimeOnly 'org.postgresql:postgresql' // 추가
+
+	// eureka client
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:4.1.0'
+	// open feign
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0'
 }
 
 tasks.named('test') {
