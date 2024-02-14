@@ -1,10 +1,7 @@
 package Project.SocialCommerce.service;
 
 import Project.SocialCommerce.controller.UserClient;
-import Project.SocialCommerce.dto.EditPostRequestDto;
-import Project.SocialCommerce.dto.PostRequestDto;
-import Project.SocialCommerce.dto.PostResponseDto;
-import Project.SocialCommerce.dto.UserResponseDto;
+import Project.SocialCommerce.dto.*;
 import Project.SocialCommerce.model.Comment;
 import Project.SocialCommerce.model.Post;
 import Project.SocialCommerce.repository.CommentRepository;
@@ -85,5 +82,22 @@ public class PostService {
         commentRepository.deleteAll(delPost.getComments());
 
         postRepository.delete(delPost);
+    }
+
+    public void likesPost(LikePostDto postDto, String jwt) {
+        Optional<Post> targetPostOpt = postRepository.findById(postDto.getPostId());
+        Long userId = userClient.findByJwt(jwt).getId();
+        if (targetPostOpt.isEmpty()) {
+            throw new IllegalArgumentException("없는 게시물 입니다.");
+        }
+        Post targetPost = targetPostOpt.get();
+
+        if (targetPost.getInteractionUser().contains(userId)) {
+            throw new IllegalArgumentException("이미 좋아요를 누르셨습니다.");
+        }
+
+        targetPost.getInteractionUser().add(userId);
+
+        postRepository.save(targetPost);
     }
 }

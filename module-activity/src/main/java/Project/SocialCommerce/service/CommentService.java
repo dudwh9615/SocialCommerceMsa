@@ -4,11 +4,13 @@ import Project.SocialCommerce.controller.UserClient;
 import Project.SocialCommerce.dto.CommentingRequestDto;
 
 import Project.SocialCommerce.dto.EditCommentRequestDto;
+import Project.SocialCommerce.dto.LikeCommentDto;
 import Project.SocialCommerce.dto.UserResponseDto;
 import Project.SocialCommerce.model.Comment;
 import Project.SocialCommerce.model.Post;
 
 import Project.SocialCommerce.repository.CommentRepository;
+import Project.SocialCommerce.repository.InteractionRepository;
 import Project.SocialCommerce.repository.PostRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -78,6 +80,25 @@ public class CommentService {
             throw new IllegalArgumentException("삭제 권한이 없습니다.");
         }
 
+        interactionRepository.deleteAllByCommentId(comment.getId());
+
         commentRepository.delete(comment);
+    }
+
+    public void likesComment(LikeCommentDto commentDto, String jwt) {
+        Optional<Comment> Opt = commentRepository.findById(commentDto.getCommentId());
+        Long userId = userClient.findByJwt(jwt).getId();
+        if (Opt.isEmpty()) {
+            throw new IllegalArgumentException("댓글 정보가 없습니다.");
+        }
+        Comment comment = Opt.get();
+
+        if (comment.getInteractionUser().contains(userId)) {
+            throw new IllegalArgumentException("이미 좋아요를 누르셨습니다.");
+        }
+
+        comment.getInteractionUser().add(userId);
+
+        commentRepository.save(comment);
     }
 }

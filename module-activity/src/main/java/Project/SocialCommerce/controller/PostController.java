@@ -42,7 +42,7 @@ public class PostController {
 
     @PostMapping("/interactions")
     public ResponseEntity<String> likesPost(@RequestBody LikePostDto postDto, @CookieValue(name = "Authorization") String jwt) {
-        interactionService.likesPost(postDto, jwt);
+        postService.likesPost(postDto, jwt);
         return ResponseEntity.ok("게시글 좋아요");
     }
 

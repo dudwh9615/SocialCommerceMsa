@@ -38,7 +38,7 @@ public class CommentController {
 
     @PostMapping("/interactions")
     public ResponseEntity<String> likesComment(@RequestBody LikeCommentDto commentDto, @CookieValue(name = "Authorization") String jwt) {
-        interactionService.likesComment(commentDto, jwt);
+        commentService.likesComment(commentDto, jwt);
         return ResponseEntity.ok("댓글 좋아요");
     }
 }
