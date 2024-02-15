@@ -2,4 +2,6 @@ rootProject.name = 'SocialCommerceMsa'
 include "module-user"
 include "module-activity"
 include "module-newsfeed"
+include "Gateway"
+include "server-eureka"
 
