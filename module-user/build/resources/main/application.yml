@@ -25,7 +25,7 @@ spring:
     port: 6378
 
   datasource:
-    url: jdbc:postgresql://postgres:5432/users_db
+    url: jdbc:postgresql://localhost:5432/users_db
     username: root
     password: 1234
     driver-class-name: org.postgresql.Driver
@@ -43,3 +43,7 @@ feign:
       default:
         connectTimeout: 160000000
         readTimeout: 160000000
+
+logging:
+  file:
+    encoding: UTF-8

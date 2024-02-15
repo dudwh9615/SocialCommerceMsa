@@ -9,9 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Gateway" />
             <option value="$PROJECT_DIR$/module-activity" />
             <option value="$PROJECT_DIR$/module-newsfeed" />
             <option value="$PROJECT_DIR$/module-user" />
+            <option value="$PROJECT_DIR$/server-eureka" />
           </set>
         </option>
       </GradleProjectSettings>

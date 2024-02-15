@@ -8,10 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication/*(exclude = {SecurityAutoConfiguration.class})*/
 @EnableDiscoveryClient
 @EnableFeignClients
-public class SocialCommerceApplication {
+public class ModuleUserApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SocialCommerceApplication.class, args);
+		SpringApplication.run(ModuleUserApplication.class, args);
 	}
 
 }

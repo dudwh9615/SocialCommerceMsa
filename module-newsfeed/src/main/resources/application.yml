@@ -5,7 +5,7 @@ spring:
   application:
     name: service-newsfeed
   datasource:
-    url: jdbc:postgresql://postgres:5432/newsfeed
+    url: jdbc:postgresql://localhost:5432/newsfeed
     username: root
     password: 1234
     driver-class-name: org.postgresql.Driver
@@ -15,4 +15,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://host.docker.internal:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
