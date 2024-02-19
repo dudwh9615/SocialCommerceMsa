@@ -4,4 +4,4 @@ include "module-activity"
 include "module-newsfeed"
 include "Gateway"
 include "server-eureka"
-
+include "module-shop"
