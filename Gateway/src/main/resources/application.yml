@@ -31,3 +31,8 @@ spring:
           uri: lb://SERVICE-NEWSFEED
           predicates:
             - Path=/feeds/**
+
+        - id: service-shop
+          uri: lb://SERVICE-SHOP
+          predicates:
+            - Path=/shop/**
