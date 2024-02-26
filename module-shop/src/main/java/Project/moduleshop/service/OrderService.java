@@ -16,7 +16,8 @@ import org.springframework.stereotype.Service;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final RedissonClient redissonClient;
+    private final StockService stockService;
+//    private final RedissonClient redissonClient;
 
     public Long createOrder(OrderRequestDto orderRequestDto) {
         Order order = Order.builder()
@@ -24,29 +25,30 @@ public class OrderService {
                 .productId(orderRequestDto.getProductId())
                 .orderStatus(OrderStatusEnum.UNPAID)
                 .build();
+        stockService.decreaseStock(orderRequestDto.getProductId());
         return orderRepository.save(order).getId();
     }
 
-    public void executeOrder(Long orderId) {
-        Order order = orderRepository.findById(orderId).orElseThrow();
-        RMap<Long, Long> stockRepo = redissonClient.getMap("productStock");
-        Long productId = order.getProductId();
-        RLock lock = redissonClient.getMap("productStock").getLock(productId);
-
-        try {
-            if (!lock.tryLock()) {
-                Long stock = stockRepo.get(productId);
-                if (stock.equals(0L)) {
-                    throw new IllegalArgumentException("남은 재고가 없습니다.");
-                }
-                stockRepo.put(productId, stock-1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (lock != null && lock.isLocked()) {
-                lock.unlock();
-            }
-        }
-    }
+//    public void executeOrder(Long orderId) {
+//        Order order = orderRepository.findById(orderId).orElseThrow();
+//        RMap<Long, Long> stockRepo = redissonClient.getMap("productStock");
+//        Long productId = order.getProductId();
+//        RLock lock = redissonClient.getMap("productStock").getLock(productId);
+//
+//        try {
+//            if (!lock.tryLock()) {
+//                Long stock = stockRepo.get(productId);
+//                if (stock.equals(0L)) {
+//                    throw new IllegalArgumentException("남은 재고가 없습니다.");
+//                }
+//                stockRepo.put(productId, stock-1);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (lock != null && lock.isLocked()) {
+//                lock.unlock();
+//            }
+//        }
+//    }
 }
