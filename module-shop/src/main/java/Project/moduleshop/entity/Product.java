@@ -19,7 +19,7 @@ public class Product {
     private Long id;
     private String name;
     private Long price;
-    private Long stock;
+    private Integer stock;
     private String explain;
     private LocalDateTime openAt;
 }
