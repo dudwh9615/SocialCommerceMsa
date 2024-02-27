@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class ProductRequestDto {
     private String name;
     private Long price;
-    private Long stock;
+    private Integer stock;
     private String explain;
     private String openAt;
 }
