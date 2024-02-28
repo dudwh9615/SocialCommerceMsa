@@ -11,10 +11,10 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: 1234
     volumes:
-      - ./users_db.sql:/docker-entrypoint-initdb.d/users_db.sql
-      - ./activity.sql:/docker-entrypoint-initdb.d/activity.sql
-      - ./newsfeed.sql:/docker-entrypoint-initdb.d/newsfeed.sql
-      - ./shop.sql:/docker-entrypoint-initdb.d/shop.sql
+      - ./create-db/users_db.sql:/docker-entrypoint-initdb.d/users_db.sql
+      - ./create-db/activity.sql:/docker-entrypoint-initdb.d/activity.sql
+      - ./create-db/newsfeed.sql:/docker-entrypoint-initdb.d/newsfeed.sql
+      - ./create-db/shop.sql:/docker-entrypoint-initdb.d/shop.sql
 #    networks:
 #      - project
 
