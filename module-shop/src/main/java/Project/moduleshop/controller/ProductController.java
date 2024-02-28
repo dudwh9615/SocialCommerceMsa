@@ -45,16 +45,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.findProduct(productId));
     }
 
-    @GetMapping("/{productId}/remain")
-    public ResponseEntity<Long> checkProductStock(@PathVariable Long productId) {
-        return ResponseEntity.ok(stockService.getStockInfo(productId));
-    }
-
     /*
      * 남은 수량
      */
-//    @GetMapping("/{productId}/stock")
-//    public ResponseEntity<Long> checkProductStock(@PathVariable Long productId) {
-//        return ResponseEntity.ok(productService.checkProductStock(productId));
-//    }
+    @GetMapping("/{productId}/remain")
+    public ResponseEntity<Integer> checkProductStock(@PathVariable Long productId) {
+        return ResponseEntity.ok(stockService.getStockInfo(productId));
+    }
 }
