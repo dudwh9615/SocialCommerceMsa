@@ -16,17 +16,20 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.projectlombok:lombok:1.18.28'
-
 	implementation 'org.projectlombok:lombok:1.18.22'
 	annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
+	// JPA 구현체인 hibernate
+	implementation 'org.hibernate:hibernate-core:6.1.7.Final'
 	// redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.redisson:redisson-spring-boot-starter:3.17.7'
 	// postgresql
 	implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0' // 추가
 	runtimeOnly 'org.postgresql:postgresql' // 추가
