@@ -6,14 +6,9 @@ import Project.SocialCommerce.model.User;
 import Project.SocialCommerce.repository.UserRepository;
 import Project.SocialCommerce.util.JwtUtil;
 import io.jsonwebtoken.Claims;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,9 +19,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final ActivityClient activityClient;
-//    private final ActivityRepository activityRepository;
-
-
 
     public void register(RegisterRequestDto requestDto) {
         String email = requestDto.getEmail();
@@ -55,7 +47,7 @@ public class UserService {
         jwt = jwtUtil.substringToken(jwt);
         Claims userInfo = jwtUtil.getUserInfoFromToken(jwt);
         String email = userInfo.getSubject();
-        System.out.println("이메일은" + email);
+
         return findByEmail(email);
     }
 
@@ -85,27 +77,4 @@ public class UserService {
 
         userRepository.save(originalUser);
     }
-
-
-    //새로 추가
-//    public void login(LoginRequestDto requestDto, HttpServletResponse res) {
-//        String email = requestDto.getEmail();
-//        String pwd = requestDto.getPwd();
-//
-//        // 사용자 확인
-//        User user = userRepository.findByEmail(email).orElseThrow(
-//                () -> new IllegalArgumentException("등록된 사용자가 없습니다.")
-//        );
-//
-//        // 비밀번호 확인
-//        if (!passwordEncoder.matches(pwd, user.getPwd())) {
-//            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-//        }
-//
-//        // JWT 생성 및 쿠키에 저장 후 Response 객체에 추가
-//        String token = jwtUtil.createToken(user.getEmail());
-//        jwtUtil.addJwtToCookie(token, res);
-//    }
-
-
 }
