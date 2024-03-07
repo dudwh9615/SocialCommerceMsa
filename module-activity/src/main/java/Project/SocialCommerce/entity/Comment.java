@@ -1,22 +1,25 @@
-package Project.SocialCommerce.model;
+package Project.SocialCommerce.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
-@Table(name = "interactions")
+@Table(name = "comments")
 @Entity
 @NoArgsConstructor
-public class Interaction {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "content")
+    private String content;
 
     private String userEmail;
 
@@ -24,11 +27,9 @@ public class Interaction {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @ManyToOne
-    @JoinColumn(name = "comment_id")
-    private Comment comment;
-
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    private List<Long> interactionUser = new ArrayList<>();
 }

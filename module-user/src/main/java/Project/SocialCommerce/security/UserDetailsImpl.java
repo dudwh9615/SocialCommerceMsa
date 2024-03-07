@@ -1,6 +1,6 @@
 package Project.SocialCommerce.security;
 
-import Project.SocialCommerce.model.User;
+import Project.SocialCommerce.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

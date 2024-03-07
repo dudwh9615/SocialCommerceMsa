@@ -1,7 +1,7 @@
 package Project.SocialCommerce.dto;
 
 
-import Project.SocialCommerce.model.ContentTypeEnum;
+import Project.SocialCommerce.entity.ContentTypeEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

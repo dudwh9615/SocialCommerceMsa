@@ -1,37 +1,37 @@
-package Project.SocialCommerce.model;
+package Project.SocialCommerce.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
-@Table(name = "comments")
 @Entity
+@Table(name = "posts")
 @NoArgsConstructor
-public class Comment {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "content")
+    @Column(name="email", nullable = false)
+    private String email;
+
+    @Column(name="content", nullable = false)
     private String content;
-
-    private String userEmail;
-
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
 
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
     private List<Long> interactionUser = new ArrayList<>();
 }

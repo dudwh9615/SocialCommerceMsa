@@ -1,13 +1,11 @@
 package Project.SocialCommerce.dto;
 
-import Project.SocialCommerce.model.Comment;
+import Project.SocialCommerce.entity.Comment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Setter
 @Getter

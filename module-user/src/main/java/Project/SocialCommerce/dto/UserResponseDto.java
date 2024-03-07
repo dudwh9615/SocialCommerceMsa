@@ -1,6 +1,6 @@
 package Project.SocialCommerce.dto;
 
-import Project.SocialCommerce.model.User;
+import Project.SocialCommerce.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 

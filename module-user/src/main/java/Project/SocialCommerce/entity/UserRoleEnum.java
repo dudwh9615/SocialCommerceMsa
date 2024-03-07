@@ -1,4 +1,4 @@
-package Project.SocialCommerce.model;
+package Project.SocialCommerce.entity;
 
 public enum UserRoleEnum {
     USER(Authority.USER),  // 사용자 권한

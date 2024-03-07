@@ -1,6 +1,6 @@
 package Project.SocialCommerce.repository;
 
-import Project.SocialCommerce.model.Comment;
+import Project.SocialCommerce.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package Project.SocialCommerce.controller;
 
 import Project.SocialCommerce.dto.FeedDto;
-import Project.SocialCommerce.model.NewsFeed;
+import Project.SocialCommerce.entity.NewsFeed;
 import Project.SocialCommerce.service.NewsFeedService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

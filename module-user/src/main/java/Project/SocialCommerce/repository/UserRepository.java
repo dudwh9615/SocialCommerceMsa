@@ -1,6 +1,6 @@
 package Project.SocialCommerce.repository;
 
-import Project.SocialCommerce.model.User;
+import Project.SocialCommerce.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

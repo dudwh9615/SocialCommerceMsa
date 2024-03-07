@@ -2,7 +2,7 @@ package Project.SocialCommerce.service;
 
 import Project.SocialCommerce.controller.ActivityClient;
 import Project.SocialCommerce.dto.*;
-import Project.SocialCommerce.model.User;
+import Project.SocialCommerce.entity.User;
 import Project.SocialCommerce.repository.UserRepository;
 import Project.SocialCommerce.util.JwtUtil;
 import io.jsonwebtoken.Claims;

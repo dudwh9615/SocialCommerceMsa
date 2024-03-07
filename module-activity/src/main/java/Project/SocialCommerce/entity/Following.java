@@ -1,4 +1,4 @@
-package Project.SocialCommerce.model;
+package Project.SocialCommerce.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,9 +1,8 @@
 package Project.SocialCommerce.service;
 
 import Project.SocialCommerce.dto.*;
-import Project.SocialCommerce.model.Comment;
-import Project.SocialCommerce.model.ContentTypeEnum;
-import Project.SocialCommerce.model.Post;
+import Project.SocialCommerce.entity.ContentTypeEnum;
+import Project.SocialCommerce.entity.Post;
 import Project.SocialCommerce.repository.CommentRepository;
 import Project.SocialCommerce.repository.PostRepository;
 import lombok.RequiredArgsConstructor;

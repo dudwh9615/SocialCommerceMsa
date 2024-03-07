@@ -1,6 +1,6 @@
 package Project.SocialCommerce.dto;
 
-import Project.SocialCommerce.model.User;
+import Project.SocialCommerce.entity.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 

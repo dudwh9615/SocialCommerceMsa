@@ -1,8 +1,7 @@
 package Project.SocialCommerce.dto;
 
 
-import Project.SocialCommerce.model.Comment;
-import Project.SocialCommerce.model.Post;
+import Project.SocialCommerce.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.Setter;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 @NoArgsConstructor
 @AllArgsConstructor
