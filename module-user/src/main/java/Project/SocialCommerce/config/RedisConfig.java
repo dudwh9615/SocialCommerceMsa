@@ -1,4 +1,4 @@
-package Project.SocialCommerce;
+package Project.SocialCommerce.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;

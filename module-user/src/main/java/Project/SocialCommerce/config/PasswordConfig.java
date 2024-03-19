@@ -1,4 +1,4 @@
-package Project.SocialCommerce;
+package Project.SocialCommerce.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

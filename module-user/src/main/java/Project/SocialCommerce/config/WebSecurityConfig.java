@@ -1,4 +1,4 @@
-package Project.SocialCommerce;
+package Project.SocialCommerce.config;
 
 import Project.SocialCommerce.security.JwtAuthenticationFilter;
 import Project.SocialCommerce.security.JwtAuthorizationFilter;
