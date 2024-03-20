@@ -1,4 +1,4 @@
-package Project.SocialCommerce.service;
+package Project.SocialCommerce.feign;
 
 import Project.SocialCommerce.dto.FeedDto;
 import org.springframework.cloud.openfeign.FeignClient;
