@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class EditCommentRequestDto {
-    private Long commentId;
-    private String content;
+public class LikeContentDto {
+    private Long contentId;
 }
