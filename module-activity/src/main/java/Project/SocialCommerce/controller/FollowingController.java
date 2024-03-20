@@ -29,7 +29,7 @@ public class FollowingController {
     }
     @GetMapping("/following/{jwt}")
     public List<Long> getUserFollowingList(@PathVariable String jwt) {
-        return followingService.findByJwt(jwt);
+        return followingService.getLoginFollowingList(jwt);
     }
 
 
