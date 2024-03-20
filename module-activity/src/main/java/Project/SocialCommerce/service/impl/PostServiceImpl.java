@@ -1,10 +1,13 @@
-package Project.SocialCommerce.service;
+package Project.SocialCommerce.service.impl;
 
 import Project.SocialCommerce.dto.*;
 import Project.SocialCommerce.entity.ContentTypeEnum;
 import Project.SocialCommerce.entity.Post;
+import Project.SocialCommerce.feign.NewsFeedClient;
+import Project.SocialCommerce.feign.UserClient;
 import Project.SocialCommerce.repository.CommentRepository;
 import Project.SocialCommerce.repository.PostRepository;
+import Project.SocialCommerce.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class PostService {
+public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserClient userClient;
