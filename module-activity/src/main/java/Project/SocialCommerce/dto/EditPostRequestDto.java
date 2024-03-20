@@ -11,7 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EditPostRequestDto {
     private Long postId;
-
-    @Lob()
     private String content;
 }

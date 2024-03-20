@@ -12,9 +12,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostRequestDto {
-
-    @Lob()
-    @Column(name="content", nullable = false)
     private String content;
-
 }
