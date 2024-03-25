@@ -8,11 +8,11 @@ public interface CommentService {
 
     void addComment(CommentingRequestDto requestDto, String jwt);
 
-    void editComment(EditCommentRequestDto requestDto, String jwt);
+    void editComment(EditContentRequestDto editCommentRequestDto, String jwt);
 
-    void delComment(EditCommentRequestDto requestDto, String jwt);
+    void delComment(DelContentRequestDto delCommentRequestDto, String jwt);
 
-    void likesComment(LikeCommentDto commentDto, String jwt);
+    void likesComment(LikeContentDto commentDto, String jwt);
 
     void addFeed(Comment comment, Post post, UserResponseDto user);
 

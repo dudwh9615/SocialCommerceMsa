@@ -23,7 +23,7 @@ public class PostServiceImpl implements PostService {
     private final CommentRepository commentRepository;
     private final NewsFeedClient newsFeedClient;
 
-
+    @Override
     public void addPost(PostRequestDto postRequestDto, String jwt) {
         System.out.println("====================================jwt입니다." + jwt);
         UserResponseDto userResponseDto = userClient.findByJwt(jwt);
@@ -38,6 +38,8 @@ public class PostServiceImpl implements PostService {
         Post savedPost = postRepository.save(newPost);
         addFeed(savedPost, userResponseDto);
     }
+
+    @Override
     public void addFeed(Post post, UserResponseDto user) {
         FeedDto newFeed = new FeedDto();
 
@@ -50,16 +52,18 @@ public class PostServiceImpl implements PostService {
         newsFeedClient.addFeed(newFeed);
     }
 
+    @Override
     public PostResponseDto getPost(Long postId) {
         Optional<Post> post = postRepository.findById(postId);
         if (post.isEmpty()) {
             throw new IllegalArgumentException("없는 게시물 입니다.");
         }
-        return new PostResponseDto(post.get());
+        return post.orElseThrow().toResponseDto();
     }
 
-    public void editPost(EditPostRequestDto editPostRequestDto, String jwt) {
-        Optional<Post> editPostOpt = postRepository.findById(editPostRequestDto.getPostId());
+    @Override
+    public void editPost(EditContentRequestDto editPostRequestDto, String jwt) {
+        Optional<Post> editPostOpt = postRepository.findById(editPostRequestDto.getContentId());
         if (editPostOpt.isEmpty()){
             throw new IllegalArgumentException("없는 게시물 입니다.");
         }
@@ -74,8 +78,9 @@ public class PostServiceImpl implements PostService {
         postRepository.save(editPost);
     }
 
-    public void delPost(EditPostRequestDto delPostRequestDto, String jwt) {
-        Optional<Post> delPostOPt = postRepository.findById(delPostRequestDto.getPostId());
+    @Override
+    public void delPost(DelContentRequestDto delPostRequestDto, String jwt) {
+        Optional<Post> delPostOPt = postRepository.findById(delPostRequestDto.getContentId());
         if (delPostOPt.isEmpty()) {
             throw new IllegalArgumentException("없는 게시물 입니다.");
         }
@@ -90,8 +95,9 @@ public class PostServiceImpl implements PostService {
         postRepository.delete(delPost);
     }
 
-    public void likesPost(LikePostDto postDto, String jwt) {
-        Optional<Post> targetPostOpt = postRepository.findById(postDto.getPostId());
+    @Override
+    public void likesPost(LikeContentDto postDto, String jwt) {
+        Optional<Post> targetPostOpt = postRepository.findById(postDto.getContentId());
         UserResponseDto user = userClient.findByJwt(jwt);
         if (targetPostOpt.isEmpty()) {
             throw new IllegalArgumentException("없는 게시물 입니다.");
@@ -107,6 +113,7 @@ public class PostServiceImpl implements PostService {
         postRepository.save(targetPost);
         addFeed(targetPost, user, targetPost.getEmail());
     }
+    @Override
     public void addFeed(Post post, UserResponseDto user, String targetEmail) {
         FeedDto newFeed = new FeedDto();
         UserResponseDto target = userClient.findByEmail(targetEmail);
