@@ -58,7 +58,7 @@ public class PostServiceImpl implements PostService {
         if (post.isEmpty()) {
             throw new IllegalArgumentException("없는 게시물 입니다.");
         }
-        return post.orElseThrow().toResponseDto();
+        return new PostResponseDto(post.get());
     }
 
     @Override
